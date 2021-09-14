@@ -3,6 +3,8 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.awt.event.ActionEvent;
+
 public class Controller {
 
     @FXML
@@ -18,23 +20,22 @@ public class Controller {
     private Button quitBtn;
 
     @FXML
-    void openSettings(ActionEvent event) {
+    void openSettings(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void quitGame(ActionEvent event) {
+    void quitGame(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void startMultiplayer(ActionEvent event) {
+    void startMultiplayer(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void startSingleplayer(ActionEvent event) {
+    void startSingleplayer(javafx.event.ActionEvent event) {
 
     }
-
 }
