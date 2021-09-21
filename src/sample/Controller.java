@@ -30,11 +30,9 @@ public class Controller {
 
     @FXML
     public void openSettings(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("settingsScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
+        Main.window.setScene(new Scene(root, 500, 400));
+        Main.window.setFullScreen(SettingsController.fullscreen);
     }
 
     @FXML
