@@ -40,6 +40,7 @@ public class Main extends Application {
         window.setTitle("Chess");
         window.setScene(new Scene(root,500,400));
         window.show();
+
     }
 
     public static void main(String[] args) {
