@@ -7,7 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.transform.Scale;
+import javafx.util.Duration;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -50,15 +53,35 @@ public class SettingsController {
         if (isDefaultPlaying) {
             isDefaultPlaying = false;
             alternativeMusicPlayer.play();
+
+            //loops music
+            alternativeMusicPlayer.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    alternativeMusicPlayer.seek(Duration.ZERO);
+                    alternativeMusicPlayer.play();
+                }
+            });
         } else {
             isDefaultPlaying = true;
             defaultMusicPlayer.play();
+
+            //loops music
+            defaultMusicPlayer.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    defaultMusicPlayer.seek(Duration.ZERO);
+                    defaultMusicPlayer.play();
+                }
+            });
         }
     }
 
     static boolean fullscreen = false;
     @FXML
     void fullscreen(javafx.event.ActionEvent event) throws IOException {
+
+        Main.window.setFullScreenExitHint("");
         Main.window.setFullScreen(!fullscreen);
         fullscreen = !fullscreen;
     }

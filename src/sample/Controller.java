@@ -2,12 +2,19 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javafx.event.ActionEvent;
 
 public class Controller {
@@ -43,11 +50,24 @@ public class Controller {
 
     @FXML
     public void startMultiplayer(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("multiplayerScene.fxml"));
+
+        root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Multiplayer Chess");
+
+        InputStream stream = new FileInputStream("C:\\Users\\walke\\IdeaProjects\\chess\\src\\sample\\data\\chessBackground.jpg");
+        Image boardImage = new Image(stream);
+        ImageView imageView = new ImageView();
+        imageView.setImage(boardImage);
+        imageView.setX(25);
+        imageView.setY(25);
+        imageView.setFitWidth(575);
+        imageView.setPreserveRatio(true);
+        root = new Group(imageView);;
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
 
     @FXML
