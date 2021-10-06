@@ -55,12 +55,13 @@ public class Controller {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Multiplayer Chess");
 
-        InputStream stream = new FileInputStream("C:\\Users\\walke\\IdeaProjects\\chess\\src\\sample\\data\\chessBackground.jpg");
+        // for input stream, put the directory of you chessBackground picture in your local machine
+        InputStream stream = new FileInputStream("/Users/franzlleshaj/IdeaProjects/chess/src/sample/data/chessBackground.jpg");
         Image boardImage = new Image(stream);
         ImageView imageView = new ImageView();
         imageView.setImage(boardImage);
-        imageView.setX(25);
-        imageView.setY(25);
+        imageView.setX(0);
+        imageView.setY(0);
         imageView.setFitWidth(575);
         imageView.setPreserveRatio(true);
         root = new Group(imageView);;
