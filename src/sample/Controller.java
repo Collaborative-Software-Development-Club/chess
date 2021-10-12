@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +47,8 @@ public class Controller {
         stage.close();
     }
 
+
+
     @FXML
     public void startMultiplayer(ActionEvent event) throws IOException {
 
@@ -56,7 +57,7 @@ public class Controller {
         stage.setTitle("Multiplayer Chess");
 
         // for input stream, put the directory of you chessBackground picture in your local machine
-        InputStream stream = new FileInputStream("./data/chessBackground.jpg");
+        InputStream stream = new FileInputStream("/Users/franzlleshaj/IdeaProjects/chess/src/sample/data/chessBackground.jpg");
         Image boardImage = new Image(stream);
         ImageView imageView = new ImageView();
         imageView.setImage(boardImage);
@@ -64,10 +65,24 @@ public class Controller {
         imageView.setY(0);
         imageView.setFitWidth(575);
         imageView.setPreserveRatio(true);
-        root = new Group(imageView);;
+        root = new Group(imageView);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+        MultiplayerController multiplayerController = new MultiplayerController();
+
+        multiplayerController.initializeBoard();
+
+        imageView.setOnMouseClicked(e -> {
+            double xCoord = e.getX();
+            double yCoord = e.getY();
+            try {
+                multiplayerController.selectPiece(event, xCoord, yCoord);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
     }
 
