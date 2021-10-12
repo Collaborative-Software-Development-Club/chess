@@ -17,7 +17,7 @@ public class MultiplayerController {
     private Stage stage;
     private Parent root;
     private String gameState;
-    public chessSquare[][] chessBoard;
+    public chessSquare[][] chessBoard = new chessSquare[8][8];
 
 
     public class chessSquare {
@@ -39,6 +39,8 @@ public class MultiplayerController {
         // make the middle of the chess board empty
         for (int i = 0; i < 8; i++) {
             for (int j = 2; j < 6; j++) {
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
                 chessBoard[i][j].isEmpty = true;
             }
         }
@@ -46,11 +48,15 @@ public class MultiplayerController {
         // assign full status to the rest of the board
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 2; j++) {
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
                 chessBoard[i][j].isEmpty = false;
                 chessBoard[i][j].chessPiece.isWhiteTeam = false;
                 chessBoard[i][j].chessPiece.isDead = false;
             }
             for (int j = 6; j < 8; j++) {
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
                 chessBoard[i][j].isEmpty = false;
                 chessBoard[i][j].chessPiece.isWhiteTeam = true;
                 chessBoard[i][j].chessPiece.isDead = false;

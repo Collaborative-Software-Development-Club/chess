@@ -57,7 +57,7 @@ public class Controller {
         stage.setTitle("Multiplayer Chess");
 
         // for input stream, put the directory of you chessBackground picture in your local machine
-        InputStream stream = new FileInputStream("/Users/franzlleshaj/IdeaProjects/chess/src/sample/data/chessBackground.jpg");
+        InputStream stream = new FileInputStream("src/sample/data/chessBackground.jpg");
         Image boardImage = new Image(stream);
         ImageView imageView = new ImageView();
         imageView.setImage(boardImage);
