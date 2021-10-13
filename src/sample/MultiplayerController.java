@@ -65,27 +65,27 @@ public class MultiplayerController {
 
         // assign pawn positions
         for (int i = 0; i < 8; i++) {
-            chessBoard[1][i].chessPiece.name = (new StringBuilder()).append("Pawn").append(i).toString();
-            chessBoard[6][i].chessPiece.name = (new StringBuilder()).append("Pawn").append(i).toString();
+            chessBoard[i][1].chessPiece.name = (new StringBuilder()).append("Pawn").append(i).toString();
+            chessBoard[i][6].chessPiece.name = (new StringBuilder()).append("Pawn").append(i).toString();
         }
 
         // assign the rest of the pieces' positions
         chessBoard[0][0].chessPiece.name = "rook";
-        chessBoard[0][1].chessPiece.name = "horse";
-        chessBoard[0][2].chessPiece.name = "bishop";
-        chessBoard[0][3].chessPiece.name = "king";
-        chessBoard[0][4].chessPiece.name = "queen";
-        chessBoard[0][5].chessPiece.name = "bishop";
-        chessBoard[0][6].chessPiece.name = "horse";
-        chessBoard[0][7].chessPiece.name = "rook";
-
+        chessBoard[1][0].chessPiece.name = "horse";
+        chessBoard[2][0].chessPiece.name = "bishop";
+        chessBoard[3][0].chessPiece.name = "king";
+        chessBoard[4][0].chessPiece.name = "queen";
+        chessBoard[5][0].chessPiece.name = "bishop";
+        chessBoard[6][0].chessPiece.name = "horse";
         chessBoard[7][0].chessPiece.name = "rook";
-        chessBoard[7][1].chessPiece.name = "horse";
-        chessBoard[7][2].chessPiece.name = "bishop";
-        chessBoard[7][3].chessPiece.name = "king";
-        chessBoard[7][4].chessPiece.name = "queen";
-        chessBoard[7][5].chessPiece.name = "bishop";
-        chessBoard[7][6].chessPiece.name = "horse";
+
+        chessBoard[0][7].chessPiece.name = "rook";
+        chessBoard[1][7].chessPiece.name = "horse";
+        chessBoard[2][7].chessPiece.name = "bishop";
+        chessBoard[3][7].chessPiece.name = "king";
+        chessBoard[4][7].chessPiece.name = "queen";
+        chessBoard[5][7].chessPiece.name = "bishop";
+        chessBoard[6][7].chessPiece.name = "horse";
         chessBoard[7][7].chessPiece.name = "rook";
 
         gameState = "whiteTurn";
@@ -97,17 +97,11 @@ public class MultiplayerController {
 
         xCoord -= 20;
         yCoord -= 20;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                System.out.println(chessBoard[i][j].chessPiece.name);
-            }
-        }
         if (xCoord < 535 && yCoord < 535) {
             int squareXCoord = (int) xCoord / 67;
             int squareYCoord = (int) yCoord / 67;
             System.out.println(squareXCoord + "," + squareYCoord);
             System.out.println(chessBoard[squareXCoord][squareYCoord].chessPiece.name);
         }
-
     }
 }
