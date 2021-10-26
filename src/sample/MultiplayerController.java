@@ -104,4 +104,30 @@ public class MultiplayerController {
             System.out.println(chessBoard[squareXCoord][squareYCoord].chessPiece.name);
         }
     }
+
+    int [] score(chessSquare[][] chessBoard){
+
+        int [] score = new int[2];
+        // first element is white score
+        // second element is black score
+        score[0] = 0;
+        score[1] = 1;
+
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                if (!chessBoard[i][j].isEmpty){
+                    if (!chessBoard[i][j].chessPiece.isDead){
+                        if (chessBoard[i][j].chessPiece.isWhiteTeam){
+                            score[0] ++;
+                        }
+                        else{
+                            score[1] ++;
+                        }
+                    }
+                }
+
+            }
+        }
+        return score;
+    }
 }
