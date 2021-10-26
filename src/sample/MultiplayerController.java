@@ -39,27 +39,27 @@ public class MultiplayerController {
         // make the middle of the chess board empty
         for (int i = 0; i < 8; i++) {
             for (int j = 2; j < 6; j++) {
-                chessBoard[i][j] = new chessSquare();
-                chessBoard[i][j].chessPiece = new chessPiece();
-                chessBoard[i][j].isEmpty = true;
+                chessBoard[j][i] = new chessSquare();
+                chessBoard[j][i].chessPiece = new chessPiece();
+                chessBoard[j][i].isEmpty = true;
             }
         }
 
         // assign full status to the rest of the board
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 2; j++) {
-                chessBoard[i][j] = new chessSquare();
-                chessBoard[i][j].chessPiece = new chessPiece();
-                chessBoard[i][j].isEmpty = false;
-                chessBoard[i][j].chessPiece.isWhiteTeam = false;
-                chessBoard[i][j].chessPiece.isDead = false;
+                chessBoard[j][i] = new chessSquare();
+                chessBoard[j][i].chessPiece = new chessPiece();
+                chessBoard[j][i].isEmpty = false;
+                chessBoard[j][i].chessPiece.isWhiteTeam = false;
+                chessBoard[j][i].chessPiece.isDead = false;
             }
             for (int j = 6; j < 8; j++) {
-                chessBoard[i][j] = new chessSquare();
-                chessBoard[i][j].chessPiece = new chessPiece();
-                chessBoard[i][j].isEmpty = false;
-                chessBoard[i][j].chessPiece.isWhiteTeam = true;
-                chessBoard[i][j].chessPiece.isDead = false;
+                chessBoard[j][i] = new chessSquare();
+                chessBoard[j][i].chessPiece = new chessPiece();
+                chessBoard[j][i].isEmpty = false;
+                chessBoard[j][i].chessPiece.isWhiteTeam = true;
+                chessBoard[j][i].chessPiece.isDead = false;
             }
         }
 
@@ -97,6 +97,7 @@ public class MultiplayerController {
 
         xCoord -= 20;
         yCoord -= 20;
+
         if (xCoord < 535 && yCoord < 535) {
             int squareXCoord = (int) xCoord / 67;
             int squareYCoord = (int) yCoord / 67;
@@ -104,4 +105,6 @@ public class MultiplayerController {
             System.out.println(chessBoard[squareXCoord][squareYCoord].chessPiece.name);
         }
     }
+
+
 }
