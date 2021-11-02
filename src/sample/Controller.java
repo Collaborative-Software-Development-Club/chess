@@ -51,41 +51,13 @@ public class Controller {
     @FXML
     public void startMultiplayer(ActionEvent event) throws IOException {
 
-        root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Multiplayer Chess");
-
-        // for input stream, put the directory of you chessBackground picture in your local machine
-        InputStream stream = new FileInputStream("src/sample/data/chessBackground.jpg");
-        Image boardImage = new Image(stream);
-        ImageView imageView = new ImageView();
-        imageView.setImage(boardImage);
-        imageView.setX(0);
-        imageView.setY(0);
-        imageView.setFitWidth(575);
-        imageView.setPreserveRatio(true);
-        root = setRoot(imageView);
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
         MultiplayerController multiplayerController = new MultiplayerController();
 
-        multiplayerController.initializeBoard();
-
-        imageView.setOnMouseClicked(e -> {
-            double xCoord = e.getX();
-            double yCoord = e.getY();
-            try {
-                multiplayerController.selectPiece(event, xCoord, yCoord);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        multiplayerController.initializeBoard(event);
 
     }
 
-    public Parent setRoot(ImageView imageView) throws IOException {
+    public static Parent setRoot(ImageView imageView) throws IOException {
         //rook
         InputStream rookStream = new FileInputStream("src/sample/data/purple pieces/rook.png");
         Image rook = new Image(rookStream);

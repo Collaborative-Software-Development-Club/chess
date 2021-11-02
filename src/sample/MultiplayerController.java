@@ -6,10 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MultiplayerController {
 
@@ -18,7 +22,7 @@ public class MultiplayerController {
     private Parent root;
     private String gameState;
     public chessSquare[][] chessBoard = new chessSquare[8][8];
-
+    private ImageView imageView;
 
     public class chessSquare {
         Boolean isEmpty;
@@ -31,10 +35,26 @@ public class MultiplayerController {
         Boolean isDead;
     }
 
-
-
     @FXML
-    void initializeBoard() {
+    void initializeBoard(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Multiplayer Chess");
+
+        // for input stream, put the directory of you chessBackground picture in your local machine
+        InputStream stream = new FileInputStream("src/sample/data/chessBackground.jpg");
+        Image boardImage = new Image(stream);
+        imageView = new ImageView();
+        imageView.setImage(boardImage);
+        imageView.setX(0);
+        imageView.setY(0);
+        imageView.setFitWidth(575);
+        imageView.setPreserveRatio(true);
+        root = Controller.setRoot(imageView);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
         // make the middle of the chess board empty
         for (int i = 0; i < 8; i++) {
@@ -88,23 +108,34 @@ public class MultiplayerController {
         chessBoard[6][7].chessPiece.name = "horse";
         chessBoard[7][7].chessPiece.name = "rook";
 
-        gameState = "whiteTurn";
+        gameState = "pendingWhite";
+
+        selectPiece(event);
+
     }
+
 
     @FXML
-    void selectPiece(ActionEvent event, double xCoord, double yCoord) throws IOException {
-        //System.out.println("["+xCoord+", "+yCoord+"]");
+    void selectPiece(ActionEvent event) throws IOException {
+        int coordinates[] = new int[2];
+        imageView.setOnMouseClicked(e -> {
+            double xCoord = e.getX();
+            double yCoord = e.getY();
+            xCoord -= 20;
+            yCoord -= 20;
 
-        xCoord -= 20;
-        yCoord -= 20;
-
-        if (xCoord < 535 && yCoord < 535) {
-            int squareXCoord = (int) xCoord / 67;
-            int squareYCoord = (int) yCoord / 67;
-            System.out.println(squareXCoord + "," + squareYCoord);
-            System.out.println(chessBoard[squareXCoord][squareYCoord].chessPiece.name);
-        }
+            if (xCoord < 535 && yCoord < 535) {
+                coordinates[0] = (int) xCoord / 67;
+                coordinates[1] = (int) yCoord / 67;
+            }
+            try {
+                makeMove(event, coordinates);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
+
 
     int [] score(chessSquare[][] chessBoard){
 
@@ -132,4 +163,12 @@ public class MultiplayerController {
         return score;
     }
 
+    @FXML
+    void makeMove(ActionEvent event, int[] coordinates) throws IOException {
+        int xCoord = coordinates[0];
+        int yCoord = coordinates[1];
+        if (gameState == "pendingWhite") {
+
+        }
+    }
 }
