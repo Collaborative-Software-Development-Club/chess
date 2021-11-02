@@ -183,8 +183,6 @@ public class MultiplayerController {
 
     @FXML
     void pickWhite(int xCoord, int yCoord) {
-        System.out.println(chessBoard[xCoord][yCoord].isEmpty);
-        System.out.println(chessBoard[xCoord][yCoord].chessPiece.name);
         if (!chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam) {
             gameState = "whitePick";
             pickedXCoord = xCoord;
