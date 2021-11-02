@@ -23,6 +23,9 @@ public class MultiplayerController {
     private String gameState;
     public chessSquare[][] chessBoard = new chessSquare[8][8];
     private ImageView imageView;
+    private int pickedXCoord;
+    private int pickedYCoord;
+
 
     public class chessSquare {
         Boolean isEmpty;
@@ -168,7 +171,24 @@ public class MultiplayerController {
         int xCoord = coordinates[0];
         int yCoord = coordinates[1];
         if (gameState == "pendingWhite") {
+            pickWhite(xCoord, yCoord);
+        } else if (gameState == "pendingBlack") {
+
+        } else if (gameState == "whitePick") {
+
+        } else if (gameState == "blackPick") {
 
         }
     }
+
+    @FXML
+    void pickWhite(int xCoord, int yCoord) {
+        if (!chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam) {
+            gameState = "whitePick";
+            pickedXCoord = xCoord;
+            pickedYCoord = yCoord;
+        }
+        System.out.println(gameState);
+    }
+
 }
