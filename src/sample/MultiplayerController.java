@@ -62,27 +62,27 @@ public class MultiplayerController {
         // make the middle of the chess board empty
         for (int i = 0; i < 8; i++) {
             for (int j = 2; j < 6; j++) {
-                chessBoard[j][i] = new chessSquare();
-                chessBoard[j][i].chessPiece = new chessPiece();
-                chessBoard[j][i].isEmpty = true;
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
+                chessBoard[i][j].isEmpty = true;
             }
         }
 
         // assign full status to the rest of the board
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 2; j++) {
-                chessBoard[j][i] = new chessSquare();
-                chessBoard[j][i].chessPiece = new chessPiece();
-                chessBoard[j][i].isEmpty = false;
-                chessBoard[j][i].chessPiece.isWhiteTeam = false;
-                chessBoard[j][i].chessPiece.isDead = false;
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
+                chessBoard[i][j].isEmpty = false;
+                chessBoard[i][j].chessPiece.isWhiteTeam = false;
+                chessBoard[i][j].chessPiece.isDead = false;
             }
             for (int j = 6; j < 8; j++) {
-                chessBoard[j][i] = new chessSquare();
-                chessBoard[j][i].chessPiece = new chessPiece();
-                chessBoard[j][i].isEmpty = false;
-                chessBoard[j][i].chessPiece.isWhiteTeam = true;
-                chessBoard[j][i].chessPiece.isDead = false;
+                chessBoard[i][j] = new chessSquare();
+                chessBoard[i][j].chessPiece = new chessPiece();
+                chessBoard[i][j].isEmpty = false;
+                chessBoard[i][j].chessPiece.isWhiteTeam = true;
+                chessBoard[i][j].chessPiece.isDead = false;
             }
         }
 
@@ -183,12 +183,13 @@ public class MultiplayerController {
 
     @FXML
     void pickWhite(int xCoord, int yCoord) {
+        System.out.println(chessBoard[xCoord][yCoord].isEmpty);
+        System.out.println(chessBoard[xCoord][yCoord].chessPiece.name);
         if (!chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam) {
             gameState = "whitePick";
             pickedXCoord = xCoord;
             pickedYCoord = yCoord;
         }
-        System.out.println(gameState);
     }
 
 }
