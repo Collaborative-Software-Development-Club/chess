@@ -111,16 +111,17 @@ public class MultiplayerController {
         chessBoard[6][7].chessPiece.name = "horse";
         chessBoard[7][7].chessPiece.name = "rook";
 
-        gameState = "pendingWhite";
+        gameState = "pendingWhite"; // white piece needs to be picked
 
-        selectPiece(event);
+        startGame(event);
 
     }
 
-
+    // executes
     @FXML
-    void selectPiece(ActionEvent event) throws IOException {
+    void startGame(ActionEvent event) throws IOException {
         int coordinates[] = new int[2];
+        // processes pixel coordinates and turns them into chess board coordinates
         imageView.setOnMouseClicked(e -> {
             double xCoord = e.getX();
             double yCoord = e.getY();
@@ -132,7 +133,7 @@ public class MultiplayerController {
                 coordinates[1] = (int) yCoord / 67;
             }
             try {
-                makeMove(event, coordinates);
+                makeMove(event, coordinates); // executes with every mouse click
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -167,22 +168,23 @@ public class MultiplayerController {
     }
 
     @FXML
-    void makeMove(ActionEvent event, int[] coordinates) throws IOException {
+    void makeMove(ActionEvent event, int[] coordinates) throws IOException { // executes with every mouse click
         int xCoord = coordinates[0];
         int yCoord = coordinates[1];
-        if (gameState == "pendingWhite") {
+        if (gameState == "pendingWhite") { // pendingWhite is when you have to pick a white chessPiece
             pickWhite(xCoord, yCoord);
-        } else if (gameState == "pendingBlack") {
-
-        } else if (gameState == "whitePick") {
-
-        } else if (gameState == "blackPick") {
-
+        } else if (gameState == "pendingBlack") { // same as above but for black chess piece
+            pickBlack(xCoord, yCoord);
+        } else if (gameState == "whitePick") { // once the white piece has been picked, pick where to put it
+            whitePickSpot(xCoord, yCoord);
+        } else if (gameState == "blackPick") { // same as above
+            blackPickSpot(xCoord, yCoord);
         }
     }
 
     @FXML
     void pickWhite(int xCoord, int yCoord) {
+        // if a white chess piece is selected, then the state is changed and its coordinates are saved
         if (!chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam) {
             gameState = "whitePick";
             pickedXCoord = xCoord;
