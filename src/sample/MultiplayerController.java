@@ -190,4 +190,43 @@ public class MultiplayerController {
         }
     }
 
+    void pickBlack(int xCoord, int yCoord) throws IOException {
+
+        // is the piece black, if so change game state to blackPick
+
+        if ((!chessBoard[xCoord][yCoord].isEmpty) && (!chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)){
+                gameState = "blackPick";
+                pickedXCoord = xCoord;
+                pickedYCoord = yCoord;
+        }
+    }
+
+
+    void blackPickSpot(int xCoord, int yCoord) throws IOException {
+
+        if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("pawn")){
+
+            if (xCoord == pickedXCoord && yCoord > -1 && yCoord < 8 && (yCoord == 1 + xCoord || yCoord == 2 + xCoord)) {
+                gameState = "pendingWhite";
+            }
+
+        }
+        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("rook")){
+
+
+
+        }
+        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("bishop")){
+
+        }
+        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("queen")){
+
+        }
+        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("king")){
+
+        }
+    }
+
 }
+
+
