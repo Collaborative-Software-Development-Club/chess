@@ -229,6 +229,22 @@ public class MultiplayerController {
         }
     }
 
+    @FXML
+    void whitePickSpot(int xCoord, int yCoord) {
+            String pieceName = chessBoard[pickedXCoord][pickedYCoord].chessPiece.name;
+            if((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)){
+              if (pieceName.equals("bishop")) {
+                if (!((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord)))){
+                    gameState = "pendingBlack";
+                }
+            } else if (pieceName.equals("pawn")) {
+
+            }
+          }
+
+        System.out.println(gameState);
+    }
+
 }
 
 
