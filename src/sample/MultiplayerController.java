@@ -23,6 +23,7 @@ public class MultiplayerController {
     private String gameState;
     public chessSquare[][] chessBoard = new chessSquare[8][8];
     private ImageView imageView;
+    private Image boardImage;
     private int pickedXCoord;
     private int pickedYCoord;
 
@@ -44,16 +45,18 @@ public class MultiplayerController {
         root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Multiplayer Chess");
+        stage.setWidth(575);
 
         // for input stream, put the directory of you chessBackground picture in your local machine
-        InputStream stream = new FileInputStream("src/sample/data/chessBackground.jpg");
-        Image boardImage = new Image(stream);
+        InputStream stream = new FileInputStream("src/sample/data/gameBackground.jpg");
+        boardImage = new Image(stream);
         imageView = new ImageView();
         imageView.setImage(boardImage);
         imageView.setX(0);
         imageView.setY(0);
         imageView.setFitWidth(575);
-        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(575);
+        imageView.setPreserveRatio(false);
         root = Controller.setRoot(imageView);
         scene = new Scene(root);
         stage.setScene(scene);
@@ -123,19 +126,22 @@ public class MultiplayerController {
         int coordinates[] = new int[2];
         // processes pixel coordinates and turns them into chess board coordinates
         imageView.setOnMouseClicked(e -> {
-            double xCoord = e.getX();
-            double yCoord = e.getY();
-            xCoord -= 20;
-            yCoord -= 20;
+            double xCoord = e.getX() / imageView.getFitWidth(); // relative coordinates to image view
+            double yCoord = e.getY() / imageView.getFitHeight();
+            double boardXCoord = (xCoord - .0365) / (.965 - .0365); // relative coordinates to board
+            double boardYCoord = (yCoord - .0365) / (.965 - .0365);
 
-            if (xCoord < 535 && yCoord < 535) {
-                coordinates[0] = (int) xCoord / 67;
-                coordinates[1] = (int) yCoord / 67;
-            }
-            try {
-                makeMove(event, coordinates); // executes with every mouse click
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            // if relative coordinates to board fall within 0% and 100%, they are converted to chess square
+            // coordinates
+            if (boardXCoord <= 1 && boardXCoord >= 0 && boardYCoord <= 1 && boardYCoord >= 0) {
+                coordinates[0] = (int) (boardXCoord * 8);
+                coordinates[1] = (int) (boardYCoord * 8);
+
+                try {
+                    makeMove(event, coordinates); // executes with every mouse click
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
@@ -232,17 +238,15 @@ public class MultiplayerController {
     @FXML
     void whitePickSpot(int xCoord, int yCoord) {
             String pieceName = chessBoard[pickedXCoord][pickedYCoord].chessPiece.name;
-            if((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)){
-              if (pieceName.equals("bishop")) {
-                if (!((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord)))){
-                    gameState = "pendingBlack";
+            if((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)) {
+                if (pieceName.equals("bishop")) {
+                    if (!((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord)))) {
+                        gameState = "pendingBlack";
+                    }
+                } else if (pieceName.equals("pawn")) {
+
                 }
-            } else if (pieceName.equals("pawn")) {
-
             }
-          }
-
-        System.out.println(gameState);
     }
 
 }
