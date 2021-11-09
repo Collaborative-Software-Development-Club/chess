@@ -36,7 +36,7 @@ public class Controller {
 
     @FXML
     public void openSettings(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("settingsScene.fxml"));
         Main.window.setScene(new Scene(root, 500, 400));
         Main.window.setFullScreen(SettingsController.fullscreen);
     }
