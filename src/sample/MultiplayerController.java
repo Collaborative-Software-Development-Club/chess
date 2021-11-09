@@ -238,15 +238,42 @@ public class MultiplayerController {
     @FXML
     void whitePickSpot(int xCoord, int yCoord) {
             String pieceName = chessBoard[pickedXCoord][pickedYCoord].chessPiece.name;
-            if((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)) {
-                if (pieceName.equals("bishop")) {
-                    if (!((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord)))) {
-                        gameState = "pendingBlack";
+              if (pieceName.equals("bishop")) {
+                  boolean noSpaceBetween = true;
+                if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)){
+                    for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                        int yCheck = Math.abs(xCoord - pickedXCoord) + pickedYCoord;
+                        if(!chessBoard[xCheck][yCheck].isEmpty) {
+                            noSpaceBetween = false;
+                        }
                     }
-                } else if (pieceName.equals("pawn")) {
-
                 }
+                if(noSpaceBetween) {
+                    gameState = "pendingBlack";
+                }
+            } else if (pieceName.equals("rook")) {
+                  if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isWhiteTeam)) {
+                      boolean noSpaceBetween = true;
+                      if(xCoord == pickedXCoord) {
+                          for(int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                              if(!chessBoard[xCoord][yCheck].isEmpty) {
+                                  noSpaceBetween = false;
+                              }
+                          }
+                      } else if (yCoord == pickedYCoord){
+                          for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                              if(!chessBoard[xCheck][yCoord].isEmpty) {
+                                  noSpaceBetween = false;
+                              }
+                          }
+                      }
+
+                      if(noSpaceBetween) {
+                          gameState = "pendingBlack";
+                      }
+                  }
             }
+        System.out.println(gameState);
     }
 
 }
