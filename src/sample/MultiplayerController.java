@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MultiplayerController {
 
@@ -279,15 +278,24 @@ public class MultiplayerController {
         System.out.println(gameState);
     }
 
+    public double[] arrayCoordToPixel(int xCoord, int yCoord) {
+        double[] coordinates = new double[2];
+        coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
+
+
+        return coordinates;
+    }
     public static Parent setRoot(ImageView imageView) throws IOException {
         //purple rook
         InputStream rookStream = new FileInputStream("src/sample/data/purple pieces/rook.png");
         Image rook = new Image(rookStream);
         ImageView rookView = new ImageView();
+        //rookView.setFitHeight(imageView.getFitHeight());
+        //rookView.setFitWidth(imageView.getFitWidth());
         rookView.setImage(rook);
         rookView.setMouseTransparent(true);
-        rookView.setX(-110);
-        rookView.setY(-40);
+        rookView.setX(imageView.getX());
+        rookView.setY(imageView.getY());
 
         //purple knight
         InputStream knightStream = new FileInputStream("src/sample/data/purple pieces/knight.png");
