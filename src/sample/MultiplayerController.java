@@ -58,9 +58,7 @@ public class MultiplayerController {
         imageView.setFitWidth(575);
         imageView.setFitHeight(575);
         imageView.setPreserveRatio(false);
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
 
         // make the middle of the chess board empty
         for (int i = 0; i < 8; i++) {
@@ -114,7 +112,10 @@ public class MultiplayerController {
         chessBoard[6][7].chessPiece.name = "horse";
         chessBoard[7][7].chessPiece.name = "rook";
 
-        root = setRoot(imageView); // add chess piece images
+        root = setRoot(imageView); // adds chess piece images to board
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
         gameState = "pickBlue"; // blue piece needs to be picked
 
