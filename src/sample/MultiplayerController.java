@@ -434,8 +434,8 @@ public class MultiplayerController {
         ImageView blueRookView = new ImageView();
         blueRookView.setImage(blueRook);
         blueRookView.setMouseTransparent(true);
-        blueRookView.setX(20);
-        blueRookView.setY(490);
+        blueRookView.setX(19);
+        blueRookView.setY(489);
 
         //blue knight
         InputStream blueKnightStream = new FileInputStream("src/sample/data/blue pieces/knight.png");
@@ -452,7 +452,7 @@ public class MultiplayerController {
         ImageView blueBishopView = new ImageView();
         blueBishopView.setImage(blueBishop);
         blueBishopView.setMouseTransparent(true);
-        blueBishopView.setX(150);
+        blueBishopView.setX(148);
         blueBishopView.setY(490);
 
         //blue queen
@@ -461,7 +461,7 @@ public class MultiplayerController {
         ImageView blueKingView = new ImageView();
         blueKingView.setImage(blueKing);
         blueKingView.setMouseTransparent(true);
-        blueKingView.setX(210);
+        blueKingView.setX(213);
         blueKingView.setY(490);
 
         //blue bishop2
@@ -470,7 +470,7 @@ public class MultiplayerController {
         ImageView blueBishopView2 = new ImageView();
         blueBishopView2.setImage(blueBishop2);
         blueBishopView2.setMouseTransparent(true);
-        blueBishopView2.setX(340);
+        blueBishopView2.setX(348);
         blueBishopView2.setY(490);
 
         //blue knight2
@@ -479,7 +479,7 @@ public class MultiplayerController {
         ImageView blueKnightView2 = new ImageView();
         blueKnightView2.setImage(blueKnight2);
         blueKnightView2.setMouseTransparent(true);
-        blueKnightView2.setX(410);
+        blueKnightView2.setX(414);
         blueKnightView2.setY(490);
 
         //blue rook2
@@ -488,7 +488,7 @@ public class MultiplayerController {
         ImageView blueRookView2 = new ImageView();
         blueRookView2.setImage(blueRook2);
         blueRookView2.setMouseTransparent(true);
-        blueRookView2.setX(480);
+        blueRookView2.setX(488);
         blueRookView2.setY(490);
 
         //blue pawn1
