@@ -497,8 +497,8 @@ public class MultiplayerController {
         ImageView bluePawnView1 = new ImageView();
         bluePawnView1.setImage(bluePawn1);
         bluePawnView1.setMouseTransparent(true);
-        bluePawnView1.setX(20);
-        bluePawnView1.setY(420);
+        bluePawnView1.setX(19);
+        bluePawnView1.setY(423);
 
         //blue pawn2
         InputStream bluePawnStream2 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -506,8 +506,8 @@ public class MultiplayerController {
         ImageView bluePawnView2 = new ImageView();
         bluePawnView2.setImage(bluePawn2);
         bluePawnView2.setMouseTransparent(true);
-        bluePawnView2.setX(80);
-        bluePawnView2.setY(420);
+        bluePawnView2.setX(86);
+        bluePawnView2.setY(423);
 
         //blue pawn3
         InputStream bluePawnStream3 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -515,8 +515,8 @@ public class MultiplayerController {
         ImageView bluePawnView3 = new ImageView();
         bluePawnView3.setImage(bluePawn3);
         bluePawnView3.setMouseTransparent(true);
-        bluePawnView3.setX(150);
-        bluePawnView3.setY(420);
+        bluePawnView3.setX(154);
+        bluePawnView3.setY(423);
 
         //blue pawn4
         InputStream bluePawnStream4 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -524,8 +524,8 @@ public class MultiplayerController {
         ImageView bluePawnView4 = new ImageView();
         bluePawnView4.setImage(bluePawn4);
         bluePawnView4.setMouseTransparent(true);
-        bluePawnView4.setX(210);
-        bluePawnView4.setY(420);
+        bluePawnView4.setX(219);
+        bluePawnView4.setY(423);
 
         //blue pawn5
         InputStream bluePawnStream5 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -533,8 +533,8 @@ public class MultiplayerController {
         ImageView bluePawnView5 = new ImageView();
         bluePawnView5.setImage(bluePawn5);
         bluePawnView5.setMouseTransparent(true);
-        bluePawnView5.setX(290);
-        bluePawnView5.setY(420);
+        bluePawnView5.setX(287);
+        bluePawnView5.setY(423);
 
         //blue pawn6
         InputStream bluePawnStream6 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -542,8 +542,8 @@ public class MultiplayerController {
         ImageView bluePawnView6 = new ImageView();
         bluePawnView6.setImage(bluePawn6);
         bluePawnView6.setMouseTransparent(true);
-        bluePawnView6.setX(340);
-        bluePawnView6.setY(420);
+        bluePawnView6.setX(353);
+        bluePawnView6.setY(423);
 
         //blue pawn7
         InputStream bluePawnStream7 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -551,8 +551,8 @@ public class MultiplayerController {
         ImageView bluePawnView7 = new ImageView();
         bluePawnView7.setImage(bluePawn7);
         bluePawnView7.setMouseTransparent(true);
-        bluePawnView7.setX(410);
-        bluePawnView7.setY(420);
+        bluePawnView7.setX(420);
+        bluePawnView7.setY(423);
 
         //blue pawn8
         InputStream bluePawnStream8 = new FileInputStream("src/sample/data/blue pieces/pawn.png");
@@ -560,8 +560,8 @@ public class MultiplayerController {
         ImageView bluePawnView8 = new ImageView();
         bluePawnView8.setImage(bluePawn8);
         bluePawnView8.setMouseTransparent(true);
-        bluePawnView8.setX(480);
-        bluePawnView8.setY(420);
+        bluePawnView8.setX(487);
+        bluePawnView8.setY(423);
 
         return new Group(imageView,rookView,knightView,bishopView,kingView,queenView,bishop2View,knight2View,
                 rook2View,pawnView,pawn2View,pawn3View,pawn4View,pawn5View,pawn6View,pawn7View,pawn8View,
