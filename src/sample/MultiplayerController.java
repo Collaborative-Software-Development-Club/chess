@@ -362,8 +362,8 @@ public class MultiplayerController {
         ImageView pawnView = new ImageView();
         pawnView.setImage(pawn);
         pawnView.setMouseTransparent(true);
-        pawnView.setX(20);
-        pawnView.setY(80);
+        pawnView.setX(18);
+        pawnView.setY(82);
 
         //purple pawn2
         InputStream pawn2Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -371,8 +371,8 @@ public class MultiplayerController {
         ImageView pawn2View = new ImageView();
         pawn2View.setImage(pawn2);
         pawn2View.setMouseTransparent(true);
-        pawn2View.setX(80);
-        pawn2View.setY(80);
+        pawn2View.setX(85);
+        pawn2View.setY(82);
 
         //purple pawn3
         InputStream pawn3Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -380,8 +380,8 @@ public class MultiplayerController {
         ImageView pawn3View = new ImageView();
         pawn3View.setImage(pawn3);
         pawn3View.setMouseTransparent(true);
-        pawn3View.setX(150);
-        pawn3View.setY(80);
+        pawn3View.setX(152);
+        pawn3View.setY(82);
 
         //purple pawn4
         InputStream pawn4Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -389,8 +389,8 @@ public class MultiplayerController {
         ImageView pawn4View = new ImageView();
         pawn4View.setImage(pawn4);
         pawn4View.setMouseTransparent(true);
-        pawn4View.setX(210);
-        pawn4View.setY(80);
+        pawn4View.setX(219);
+        pawn4View.setY(82);
 
         //purple pawn5
         InputStream pawn5Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -398,8 +398,8 @@ public class MultiplayerController {
         ImageView pawn5View = new ImageView();
         pawn5View.setImage(pawn5);
         pawn5View.setMouseTransparent(true);
-        pawn5View.setX(290);
-        pawn5View.setY(80);
+        pawn5View.setX(285);
+        pawn5View.setY(82);
 
         //purple pawn6
         InputStream pawn6Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -407,8 +407,8 @@ public class MultiplayerController {
         ImageView pawn6View = new ImageView();
         pawn6View.setImage(pawn6);
         pawn6View.setMouseTransparent(true);
-        pawn6View.setX(340);
-        pawn6View.setY(80);
+        pawn6View.setX(352);
+        pawn6View.setY(82);
 
         //purple pawn7
         InputStream pawn7Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -416,8 +416,8 @@ public class MultiplayerController {
         ImageView pawn7View = new ImageView();
         pawn7View.setImage(pawn7);
         pawn7View.setMouseTransparent(true);
-        pawn7View.setX(410);
-        pawn7View.setY(80);
+        pawn7View.setX(418);
+        pawn7View.setY(82);
 
         //purple pawn8
         InputStream pawn8Stream = new FileInputStream("src/sample/data/purple pieces/pawn.png");
@@ -425,8 +425,8 @@ public class MultiplayerController {
         ImageView pawn8View = new ImageView();
         pawn8View.setImage(pawn8);
         pawn8View.setMouseTransparent(true);
-        pawn8View.setX(480);
-        pawn8View.setY(80);
+        pawn8View.setX(485);
+        pawn8View.setY(82);
 
         //blue rook
         InputStream blueRookStream = new FileInputStream("src/sample/data/blue pieces/rook.png");
