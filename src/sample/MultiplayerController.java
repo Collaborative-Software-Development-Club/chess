@@ -296,7 +296,7 @@ public class MultiplayerController {
         rookView.setMouseTransparent(true);
         rookView.setX(imageView.getX());
         rookView.setY(imageView.getY());
-        rookView.setX(20);
+        rookView.setX(14);
         rookView.setY(20);
 
         //purple knight
@@ -305,8 +305,8 @@ public class MultiplayerController {
         ImageView knightView = new ImageView();
         knightView.setImage(knight);
         knightView.setMouseTransparent(true);
-        knightView.setX(80);
-        knightView.setY(20);
+        knightView.setX(73);
+        knightView.setY(18);
 
         //purple bishop
         InputStream bishopStream = new FileInputStream("src/sample/data/purple pieces/bishop.png");
@@ -314,7 +314,7 @@ public class MultiplayerController {
         ImageView bishopView = new ImageView();
         bishopView.setImage(bishop);
         bishopView.setMouseTransparent(true);
-        bishopView.setX(150);
+        bishopView.setX(146);
         bishopView.setY(20);
 
         //purple king
@@ -323,8 +323,8 @@ public class MultiplayerController {
         ImageView kingView = new ImageView();
         kingView.setImage(king);
         kingView.setMouseTransparent(true);
-        kingView.setX(210);
-        kingView.setY(20);
+        kingView.setX(212);
+        kingView.setY(18);
 
         //purple queen
         InputStream queenStream = new FileInputStream("src/sample/data/purple pieces/queen.png");
@@ -332,22 +332,22 @@ public class MultiplayerController {
         ImageView queenView = new ImageView();
         queenView.setImage(queen);
         queenView.setMouseTransparent(true);
-        queenView.setX(290);
-        queenView.setY(20);
+        queenView.setX(289);
+        queenView.setY(21);
 
         //purple bishop2
         ImageView bishop2View = new ImageView();
         bishop2View.setImage(bishop);
         bishop2View.setMouseTransparent(true);
-        bishop2View.setX(340);
+        bishop2View.setX(345);
         bishop2View.setY(20);
 
         //purple knight2
         ImageView knight2View = new ImageView();
         knight2View.setImage(knight);
         knight2View.setMouseTransparent(true);
-        knight2View.setX(410);
-        knight2View.setY(20);
+        knight2View.setX(406);
+        knight2View.setY(18);
 
         //purple rook2
         ImageView rook2View = new ImageView();
