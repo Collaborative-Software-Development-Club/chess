@@ -133,6 +133,10 @@ public class MultiplayerController {
             double boardXCoord = (xCoord - .0365) / (.965 - .0365); // relative coordinates to board
             double boardYCoord = (yCoord - .0365) / (.965 - .0365);
 
+            System.out.println(xCoord);
+            System.out.println(yCoord);
+
+            System.out.println(chessBoard[pickedXCoord][pickedYCoord].chessPiece.name);
             // if relative coordinates to board fall within 0% and 100%, they are converted to chess square
             // coordinates
             if (boardXCoord <= 1 && boardXCoord >= 0 && boardYCoord <= 1 && boardYCoord >= 0) {
@@ -240,8 +244,8 @@ public class MultiplayerController {
     @FXML
     void bluePickSpot(int xCoord, int yCoord) {
             String pieceName = chessBoard[pickedXCoord][pickedYCoord].chessPiece.name;
+            boolean noSpaceBetween = true;
               if (pieceName.equals("bishop")) {
-                  boolean noSpaceBetween = true;
                 if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
                     for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
                         int yCheck = Math.abs(xCoord - pickedXCoord) + pickedYCoord;
@@ -249,18 +253,20 @@ public class MultiplayerController {
                             noSpaceBetween = false;
                         }
                     }
-                }
-                if(noSpaceBetween) {
-                    gameState = "pickPurple";
+                    if(noSpaceBetween) {
+                        gameState = "pickPurple";
+                    }
                 }
             } else if (pieceName.equals("rook")) {
                   if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
-                      boolean noSpaceBetween = true;
                       if(xCoord == pickedXCoord) {
                           for(int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
                               if(!chessBoard[xCoord][yCheck].isEmpty) {
                                   noSpaceBetween = false;
                               }
+                          }
+                          if(noSpaceBetween) {
+                              gameState = "pickPurple";
                           }
                       } else if (yCoord == pickedYCoord){
                           for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
@@ -268,20 +274,76 @@ public class MultiplayerController {
                                   noSpaceBetween = false;
                               }
                           }
+                          if(noSpaceBetween) {
+                              gameState = "pickPurple";
+                          }
                       }
+                  }
+            } else if(pieceName.equals("pawn")) {
+                      if ((chessBoard[xCoord][yCoord].isEmpty) && xCoord == pickedXCoord) {
+                          if (yCoord != 1) {
+                              if(yCoord - pickedYCoord == 1) {
+                                  gameState = "pickPurple";
+                              }
+                          } else {
+                              if(yCoord - pickedYCoord <= 2) {
+                                  gameState = "pickPurple";
+                              }
+                          }
+                      } else if (!chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+                          if(yCoord - pickedYCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
+                              gameState = "pickPurple";
+                          }
+                      }
+              } else if(pieceName.equals("queen")) {
+                  if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
+                      if(xCoord == pickedXCoord) {
+                          for(int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                              if(!chessBoard[xCoord][yCheck].isEmpty) {
+                                  noSpaceBetween = false;
+                              }
+                          }
+                          if(noSpaceBetween) {
+                              gameState = "pickPurple";
+                          }
+                      } else if (yCoord == pickedYCoord){
+                          for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                              if(!chessBoard[xCheck][yCoord].isEmpty) {
+                                  noSpaceBetween = false;
+                              }
+                          }
+                          if(noSpaceBetween) {
+                              gameState = "pickPurple";
+                          }
+                      }
+                  }
 
+                  if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
+                      for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                          int yCheck = Math.abs(xCoord - pickedXCoord) + pickedYCoord;
+                          if(!chessBoard[xCheck][yCheck].isEmpty) {
+                              noSpaceBetween = false;
+                          }
+                      }
                       if(noSpaceBetween) {
                           gameState = "pickPurple";
                       }
                   }
-            }
+              } else if(pieceName.equals("king")) {
+                  if(Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1) {
+                      gameState = "pickPurple";
+                  }
+              } else if(pieceName.equals("horse")) {
+                  if((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) {
+                      gameState = "pickPurple";
+                  }
+              }
         System.out.println(gameState);
     }
 
     public double[] arrayCoordToPixel(int xCoord, int yCoord) {
         double[] coordinates = new double[2];
         coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
-
 
         return coordinates;
     }
