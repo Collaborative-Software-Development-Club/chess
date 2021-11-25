@@ -218,27 +218,157 @@ public class MultiplayerController {
 
     void purplePickSpot(int xCoord, int yCoord) throws IOException {
 
-        if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("pawn")){
-
-            if (xCoord == pickedXCoord && yCoord > -1 && yCoord < 8 && (yCoord == 1 + xCoord || yCoord == 2 + xCoord)) {
-                gameState = "pickBlue";
+        String pieceName = chessBoard[pickedXCoord][pickedYCoord].chessPiece.name;
+        boolean noSpaceBetween = true;
+        if (pieceName.equals("bishop")) {
+            if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
+                for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                    int yCheck = Math.abs(xCoord - pickedXCoord) + pickedYCoord;
+                    if(!chessBoard[xCheck][yCheck].isEmpty) {
+                        noSpaceBetween = false;
+                    }
+                }
+                if(noSpaceBetween) {
+                    gameState = "pickBlue";
+                    chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                    chessBoard[xCoord][yCoord].isEmpty = false;
+                    chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                    chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                    chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                }
+            }
+        } else if (pieceName.equals("rook")) {
+            if ((chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
+                if(xCoord == pickedXCoord) {
+                    for(int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                        if(!chessBoard[xCoord][yCheck].isEmpty) {
+                            noSpaceBetween = false;
+                        }
+                    }
+                    if(noSpaceBetween) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                } else if (yCoord == pickedYCoord){
+                    for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                        if(!chessBoard[xCheck][yCoord].isEmpty) {
+                            noSpaceBetween = false;
+                        }
+                    }
+                    if(noSpaceBetween) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                }
+            }
+        } else if(pieceName.contains("Pawn")) {
+            if ((chessBoard[xCoord][yCoord].isEmpty) && xCoord == pickedXCoord) {
+                if (pickedYCoord != 1) {
+                    if(yCoord - pickedYCoord == 1) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                } else {
+                    if(yCoord - pickedYCoord == 2 || yCoord - pickedYCoord == 1) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                }
+            } else if (chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+                if(yCoord - pickedYCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
+                    gameState = "pickBlue";
+                    chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                    chessBoard[xCoord][yCoord].isEmpty = false;
+                    chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                    chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                    chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                }
+            }
+        } else if(pieceName.equals("queen")) {
+            if ((chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
+                if(xCoord == pickedXCoord) {
+                    for(int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                        if(!chessBoard[xCoord][yCheck].isEmpty) {
+                            noSpaceBetween = false;
+                        }
+                    }
+                    if(noSpaceBetween) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                } else if (yCoord == pickedYCoord){
+                    for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                        if(!chessBoard[xCheck][yCoord].isEmpty) {
+                            noSpaceBetween = false;
+                        }
+                    }
+                    if(noSpaceBetween) {
+                        gameState = "pickBlue";
+                        chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                    }
+                }
             }
 
+            if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
+                for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                    int yCheck = Math.abs(xCoord - pickedXCoord) + pickedYCoord;
+                    if(!chessBoard[xCheck][yCheck].isEmpty) {
+                        noSpaceBetween = false;
+                    }
+                }
+                if(noSpaceBetween) {
+                    gameState = "pickBlue";
+                    chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                    chessBoard[xCoord][yCoord].isEmpty = false;
+                    chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                    chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                    chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                }
+            }
+        } else if(pieceName.equals("king")) {
+            if(Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1) {
+                gameState = "pickBlue";
+                chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                chessBoard[xCoord][yCoord].isEmpty = false;
+                chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+            }
+        } else if(pieceName.equals("horse")) {
+            if((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) {
+                gameState = "pickBlue";
+                chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                chessBoard[xCoord][yCoord].isEmpty = false;
+                chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+            }
         }
-        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("rook")){
-
-
-
-        }
-        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("bishop")){
-
-        }
-        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("queen")){
-
-        }
-        else if (chessBoard[pickedXCoord][pickedYCoord].chessPiece.name.equals("king")){
-
-        }
+        System.out.println(gameState);
     }
 
     @FXML
@@ -256,7 +386,11 @@ public class MultiplayerController {
                     if(noSpaceBetween) {
                         gameState = "pickPurple";
                         chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                        chessBoard[xCoord][yCoord].isEmpty = false;
+                        chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                         chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                        chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                        chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                     }
                 }
             } else if (pieceName.equals("rook")) {
@@ -270,7 +404,11 @@ public class MultiplayerController {
                           if(noSpaceBetween) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                              chessBoard[xCoord][yCoord].isEmpty = false;
+                              chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                              chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                              chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       } else if (yCoord == pickedYCoord){
                           for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
@@ -281,30 +419,46 @@ public class MultiplayerController {
                           if(noSpaceBetween) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                              chessBoard[xCoord][yCoord].isEmpty = false;
+                              chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                              chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                              chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       }
                   }
-            } else if(pieceName.equals("pawn")) {
+            } else if(pieceName.contains("Pawn")) {
                       if ((chessBoard[xCoord][yCoord].isEmpty) && xCoord == pickedXCoord) {
-                          if (yCoord != 1) {
-                              if(yCoord - pickedYCoord == 1) {
+                          if (pickedYCoord != 6) {
+                              if(pickedYCoord - yCoord == 1) {
                                   gameState = "pickPurple";
                                   chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                                  chessBoard[xCoord][yCoord].isEmpty = false;
+                                  chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                                   chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                                  chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                                  chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                               }
                           } else {
-                              if(yCoord - pickedYCoord <= 2) {
+                              if(pickedYCoord - yCoord  == 2 || pickedYCoord - yCoord == 1) {
                                   gameState = "pickPurple";
                                   chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                                  chessBoard[xCoord][yCoord].isEmpty = false;
+                                  chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                                   chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                                  chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                                  chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                               }
                           }
                       } else if (!chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
-                          if(yCoord - pickedYCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
+                          if(pickedYCoord - yCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                              chessBoard[xCoord][yCoord].isEmpty = false;
+                              chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                              chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                              chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       }
               } else if(pieceName.equals("queen")) {
@@ -318,7 +472,11 @@ public class MultiplayerController {
                           if(noSpaceBetween) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                              chessBoard[xCoord][yCoord].isEmpty = false;
+                              chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                              chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                              chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       } else if (yCoord == pickedYCoord){
                           for(int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
@@ -329,7 +487,11 @@ public class MultiplayerController {
                           if(noSpaceBetween) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                              chessBoard[xCoord][yCoord].isEmpty = false;
+                              chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                              chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                              chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       }
                   }
@@ -344,20 +506,32 @@ public class MultiplayerController {
                       if(noSpaceBetween) {
                           gameState = "pickPurple";
                           chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                          chessBoard[xCoord][yCoord].isEmpty = false;
+                          chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                           chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                          chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                          chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                       }
                   }
               } else if(pieceName.equals("king")) {
                   if(Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1) {
                       gameState = "pickPurple";
                       chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                      chessBoard[xCoord][yCoord].isEmpty = false;
+                      chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                       chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                      chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                      chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                   }
               } else if(pieceName.equals("horse")) {
                   if((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) {
                       gameState = "pickPurple";
                       chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                      chessBoard[xCoord][yCoord].isEmpty = false;
+                      chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
                       chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                      chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                      chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                   }
               }
         System.out.println(gameState);
