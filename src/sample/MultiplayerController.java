@@ -222,17 +222,25 @@ public class MultiplayerController {
         boolean noSpaceBetween = true;
         if (pieceName.equals("bishop")) {
             if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
-                int yCheck = yCoord;
-                if(yCoord < pickedYCoord) {
-                    for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
-                        yCheck++;
+                int yCheck = pickedYCoord;
+                if(pickedXCoord > xCoord) {
+                    for (int xCheck = pickedXCoord - 1; xCheck >= xCoord; xCheck--) {
+                        if(yCoord < pickedYCoord) {
+                            yCheck--;
+                        } else if(yCoord > pickedYCoord) {
+                            yCheck++;
+                        }
                         if (!chessBoard[xCheck][yCheck].isEmpty) {
                             noSpaceBetween = false;
                         }
                     }
                 } else {
-                    for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
-                        yCheck--;
+                    for (int xCheck = pickedXCoord + 1; xCheck <= xCoord; xCheck++) {
+                        if(yCoord < pickedYCoord) {
+                            yCheck--;
+                        } else if(yCoord > pickedYCoord){
+                            yCheck++;
+                        }
                         if (!chessBoard[xCheck][yCheck].isEmpty) {
                             noSpaceBetween = false;
                         }
@@ -250,14 +258,14 @@ public class MultiplayerController {
         } else if (pieceName.equals("rook")) {
             if ((chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                 if(xCoord == pickedXCoord) {
-                    if(yCoord < pickedYCoord) {
-                        for (int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                    if(pickedYCoord < yCoord) {
+                        for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int yCheck = yCoord; yCheck > pickedYCoord; yCheck--) {
+                        for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -273,14 +281,14 @@ public class MultiplayerController {
                         chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
                     }
                 } else if (yCoord == pickedYCoord){
-                    if(xCoord < pickedXCoord) {
-                        for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                    if(pickedXCoord < xCoord) {
+                        for (int xCheck = pickedXCoord; xCheck < xCoord; xCheck++) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
+                        for (int xCheck = pickedXCoord; xCheck > xCoord; xCheck--) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -330,14 +338,14 @@ public class MultiplayerController {
         } else if(pieceName.equals("queen")) {
             if ((chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                 if(xCoord == pickedXCoord) {
-                    if(yCoord < pickedYCoord) {
-                        for (int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                    if(pickedYCoord < yCoord) {
+                        for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int yCheck = yCoord; yCheck > pickedYCoord; yCheck--) {
+                        for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -352,14 +360,14 @@ public class MultiplayerController {
                         chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
                     }
                 } else if (yCoord == pickedYCoord){
-                    if(xCoord < pickedXCoord) {
-                        for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                    if(pickedXCoord < xCoord) {
+                        for (int xCheck = pickedXCoord; xCheck < xCoord; xCheck++) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
+                        for (int xCheck = pickedXCoord; xCheck > xCoord; xCheck--) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -377,17 +385,25 @@ public class MultiplayerController {
             }
 
             if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
-                int yCheck = yCoord;
-                if(yCoord < pickedYCoord) {
-                    for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
-                        yCheck++;
+                int yCheck = pickedYCoord;
+                if(pickedXCoord > xCoord) {
+                    for (int xCheck = pickedXCoord - 1; xCheck >= xCoord; xCheck--) {
+                        if(yCoord < pickedYCoord) {
+                            yCheck--;
+                        } else if(yCoord > pickedYCoord) {
+                            yCheck++;
+                        }
                         if (!chessBoard[xCheck][yCheck].isEmpty) {
                             noSpaceBetween = false;
                         }
                     }
                 } else {
-                    for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
-                        yCheck--;
+                    for (int xCheck = pickedXCoord + 1; xCheck <= xCoord; xCheck++) {
+                        if(yCoord < pickedYCoord) {
+                            yCheck--;
+                        } else if(yCoord > pickedYCoord){
+                            yCheck++;
+                        }
                         if (!chessBoard[xCheck][yCheck].isEmpty) {
                             noSpaceBetween = false;
                         }
@@ -430,17 +446,25 @@ public class MultiplayerController {
             boolean noSpaceBetween = true;
               if (pieceName.equals("bishop")) {
                 if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
-                    int yCheck = yCoord;
-                    if(yCoord < pickedYCoord) {
-                        for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
-                            yCheck++;
+                    int yCheck = pickedYCoord;
+                    if(pickedXCoord > xCoord) {
+                        for (int xCheck = pickedXCoord - 1; xCheck >= xCoord; xCheck--) {
+                            if(yCoord < pickedYCoord) {
+                                yCheck--;
+                            } else if(yCoord > pickedYCoord) {
+                                yCheck++;
+                            }
                             if (!chessBoard[xCheck][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
-                            yCheck--;
+                        for (int xCheck = pickedXCoord + 1; xCheck <= xCoord; xCheck++) {
+                            if(yCoord < pickedYCoord) {
+                                yCheck--;
+                            } else if(yCoord > pickedYCoord){
+                                yCheck++;
+                            }
                             if (!chessBoard[xCheck][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -459,14 +483,14 @@ public class MultiplayerController {
             } else if (pieceName.equals("rook")) {
                   if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                       if(xCoord == pickedXCoord) {
-                          if(yCoord < pickedYCoord) {
-                              for (int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                          if(pickedYCoord < yCoord) {
+                              for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
                               }
                           } else {
-                              for (int yCheck = yCoord; yCheck > pickedYCoord; yCheck--) {
+                              for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
@@ -482,14 +506,14 @@ public class MultiplayerController {
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       } else if (yCoord == pickedYCoord){
-                          if(xCoord < pickedXCoord) {
-                              for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                          if(pickedXCoord < xCoord) {
+                              for (int xCheck = pickedXCoord; xCheck < xCoord; xCheck++) {
                                   if (!chessBoard[xCheck][yCoord].isEmpty) {
                                       noSpaceBetween = false;
                                   }
                               }
                           } else {
-                              for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
+                              for (int xCheck = pickedXCoord; xCheck > xCoord; xCheck--) {
                                   if (!chessBoard[xCheck][yCoord].isEmpty) {
                                       noSpaceBetween = false;
                                   }
@@ -543,14 +567,14 @@ public class MultiplayerController {
               } else if(pieceName.equals("queen")) {
                   if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                       if(xCoord == pickedXCoord) {
-                          if(yCoord < pickedYCoord) {
-                              for (int yCheck = yCoord; yCheck < pickedYCoord; yCheck++) {
+                          if(pickedYCoord < yCoord) {
+                              for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
                               }
                           } else {
-                              for (int yCheck = yCoord; yCheck > pickedYCoord; yCheck--) {
+                              for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
@@ -566,14 +590,14 @@ public class MultiplayerController {
                               chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                           }
                       } else if (yCoord == pickedYCoord){
-                          if(xCoord < pickedXCoord) {
-                              for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
+                          if(pickedXCoord < xCoord) {
+                              for (int xCheck = pickedXCoord; xCheck < xCoord; xCheck++) {
                                   if (!chessBoard[xCheck][yCoord].isEmpty) {
                                       noSpaceBetween = false;
                                   }
                               }
                           } else {
-                              for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
+                              for (int xCheck = pickedXCoord; xCheck > xCoord; xCheck--) {
                                   if (!chessBoard[xCheck][yCoord].isEmpty) {
                                       noSpaceBetween = false;
                                   }
@@ -592,17 +616,25 @@ public class MultiplayerController {
                   }
 
                   if (((Math.abs(xCoord - pickedXCoord) == Math.abs(yCoord - pickedYCoord))) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)){
-                      int yCheck = yCoord;
-                      if(yCoord < pickedYCoord) {
-                          for (int xCheck = xCoord; xCheck < pickedXCoord; xCheck++) {
-                              yCheck++;
+                      int yCheck = pickedYCoord;
+                      if(pickedXCoord > xCoord) {
+                          for (int xCheck = pickedXCoord - 1; xCheck >= xCoord; xCheck--) {
+                              if(yCoord < pickedYCoord) {
+                                  yCheck--;
+                              } else if(yCoord > pickedYCoord) {
+                                  yCheck++;
+                              }
                               if (!chessBoard[xCheck][yCheck].isEmpty) {
                                   noSpaceBetween = false;
                               }
                           }
                       } else {
-                          for (int xCheck = xCoord; xCheck > pickedXCoord; xCheck--) {
-                              yCheck--;
+                          for (int xCheck = pickedXCoord + 1; xCheck <= xCoord; xCheck++) {
+                              if(yCoord < pickedYCoord) {
+                                  yCheck--;
+                              } else if(yCoord > pickedYCoord){
+                                  yCheck++;
+                              }
                               if (!chessBoard[xCheck][yCheck].isEmpty) {
                                   noSpaceBetween = false;
                               }
