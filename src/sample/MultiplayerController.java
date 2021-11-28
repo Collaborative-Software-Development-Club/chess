@@ -346,13 +346,13 @@ public class MultiplayerController {
             if ((chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                 if(xCoord == pickedXCoord) {
                     if(pickedYCoord < yCoord) {
-                        for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
+                        for (int yCheck = pickedYCoord + 1; yCheck < yCoord; yCheck++) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
+                        for (int yCheck = pickedYCoord - 1; yCheck > yCoord; yCheck--) {
                             if (!chessBoard[xCoord][yCheck].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -575,13 +575,13 @@ public class MultiplayerController {
                   if ((chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                       if(xCoord == pickedXCoord) {
                           if(pickedYCoord < yCoord) {
-                              for (int yCheck = pickedYCoord; yCheck < yCoord; yCheck++) {
+                              for (int yCheck = pickedYCoord + 1; yCheck < yCoord; yCheck++) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
                               }
                           } else {
-                              for (int yCheck = pickedYCoord; yCheck > yCoord; yCheck--) {
+                              for (int yCheck = pickedYCoord - 1; yCheck > yCoord; yCheck--) {
                                   if (!chessBoard[xCoord][yCheck].isEmpty) {
                                       noSpaceBetween = false;
                                   }
@@ -730,8 +730,8 @@ public class MultiplayerController {
         double[] coordinates = new double[2];
 //        coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
 
-        coordinates[0] = ((xCoord / 8.0)) * imageView.getFitWidth();
-        coordinates[1] = ((yCoord / 8.0)) * imageView.getFitHeight();
+        coordinates[0] = ((imageView.getFitWidth()/8.0) * xCoord);
+        coordinates[1] = ((imageView.getFitHeight()/8.0) * yCoord);
 
         return coordinates;
     }
@@ -914,6 +914,15 @@ public class MultiplayerController {
         blueKingView.setX(213);
         blueKingView.setY(490);
 
+        //blue queen
+        InputStream blueQueenStream = new FileInputStream("src/sample/data/blue pieces/queen.png");
+        Image blueQueen = new Image(blueQueenStream);
+        ImageView blueQueenView = new ImageView();
+        blueQueenView.setImage(blueQueen);
+        blueQueenView.setMouseTransparent(true);
+        blueQueenView.setX(281);
+        blueQueenView.setY(490);
+
         //blue bishop2
         InputStream blueBishop2Stream = new FileInputStream("src/sample/data/blue pieces/bishop.png");
         Image blueBishop2 = new Image(blueBishop2Stream);
@@ -1015,7 +1024,7 @@ public class MultiplayerController {
 
         return new Group(imageView,rookView,knightView,bishopView,kingView,queenView,bishop2View,knight2View,
                 rook2View,pawnView,pawn2View,pawn3View,pawn4View,pawn5View,pawn6View,pawn7View,pawn8View,
-                blueRookView,blueKnightView,blueBishopView,blueKingView,blueBishopView2,blueKnightView2,
+                blueRookView,blueKnightView,blueBishopView,blueKingView,blueQueenView,blueBishopView2,blueKnightView2,
                 blueRookView2,bluePawnView1,bluePawnView2,bluePawnView3,bluePawnView4,bluePawnView5,bluePawnView6,bluePawnView7,bluePawnView8);
     }
 
