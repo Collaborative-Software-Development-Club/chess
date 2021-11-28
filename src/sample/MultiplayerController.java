@@ -289,13 +289,13 @@ public class MultiplayerController {
                     }
                 } else if (yCoord == pickedYCoord){
                     if(pickedXCoord < xCoord) {
-                        for (int xCheck = pickedXCoord; xCheck < xCoord; xCheck++) {
+                        for (int xCheck = pickedXCoord + 1; xCheck < xCoord; xCheck++) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
                         }
                     } else {
-                        for (int xCheck = pickedXCoord; xCheck > xCoord; xCheck--) {
+                        for (int xCheck = pickedXCoord - 1; xCheck > xCoord; xCheck--) {
                             if (!chessBoard[xCheck][yCoord].isEmpty) {
                                 noSpaceBetween = false;
                             }
@@ -730,8 +730,8 @@ public class MultiplayerController {
         double[] coordinates = new double[2];
 //      coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
 
-        coordinates[0] = ((((imageView.getFitHeight() - 40)/8.0) * xCoord) + 20);
-        coordinates[1] = ((((imageView.getFitHeight() - 40)/8.0) * yCoord) + 20);
+        coordinates[0] = ((((imageView.getFitHeight()*0.94)/8.0) * xCoord)+15);
+        coordinates[1] = ((((imageView.getFitHeight()*0.94)/8.0) * yCoord)+15);
         return coordinates;
     }
     public static Parent setRoot(ImageView imageView) throws IOException {
