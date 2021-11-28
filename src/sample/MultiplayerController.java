@@ -12,8 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class MultiplayerController {
 
@@ -116,6 +118,9 @@ public class MultiplayerController {
         stage.setScene(scene);
         stage.show();
 
+
+
+
         gameState = "pickBlue"; // blue piece needs to be picked
 
         startGame(event);
@@ -189,8 +194,10 @@ public class MultiplayerController {
             pickPurple(xCoord, yCoord);
         } else if (gameState == "bluePickSpot") { // once the blue piece has been picked, pick where to put it
             bluePickSpot(xCoord, yCoord);
+            updateImage();
         } else if (gameState == "purplePickSpot") { // same as above
             purplePickSpot(xCoord, yCoord);
+            updateImage();
         }
     }
 
@@ -419,7 +426,7 @@ public class MultiplayerController {
                 }
             }
         } else if(pieceName.equals("king")) {
-            if((Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1 && (xCoord - pickedXCoord + yCoord - pickedYCoord != 0)) && chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+            if((Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1 && (xCoord - pickedXCoord != 0 || yCoord - pickedYCoord != 0)) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                 gameState = "pickBlue";
                 chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
                 chessBoard[xCoord][yCoord].isEmpty = false;
@@ -428,7 +435,7 @@ public class MultiplayerController {
                 chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
             }
         } else if(pieceName.equals("horse")) {
-            if(((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) && chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+            if(((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) && (chessBoard[xCoord][yCoord].isEmpty || chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                 gameState = "pickBlue";
                 chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
                 chessBoard[xCoord][yCoord].isEmpty = false;
@@ -651,7 +658,7 @@ public class MultiplayerController {
                       }
                   }
               } else if(pieceName.equals("king")) {
-                  if((Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1 && (xCoord - pickedXCoord + yCoord - pickedYCoord != 0)) && !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+                  if((Math.abs(xCoord - pickedXCoord) <= 1 && Math.abs(yCoord - pickedYCoord) <= 1 && (xCoord - pickedXCoord != 0 || yCoord - pickedYCoord != 0)) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                       gameState = "pickPurple";
                       chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
                       chessBoard[xCoord][yCoord].isEmpty = false;
@@ -661,7 +668,7 @@ public class MultiplayerController {
                       chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
                   }
               } else if(pieceName.equals("horse")) {
-                  if(((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) && !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+                  if(((Math.abs(xCoord - pickedXCoord) == 2 && Math.abs(yCoord - pickedYCoord) == 1) || (Math.abs(yCoord - pickedYCoord) == 2 && Math.abs(xCoord - pickedXCoord) == 1)) && (chessBoard[xCoord][yCoord].isEmpty || !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam)) {
                       gameState = "pickPurple";
                       chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
                       chessBoard[xCoord][yCoord].isEmpty = false;
@@ -674,9 +681,57 @@ public class MultiplayerController {
         System.out.println(gameState);
     }
 
+    @FXML
+    void updateImage() {
+
+        Group pGroup = new Group();
+        pGroup.getChildren().add(imageView);
+            for(int i = 0; i < 8; i++) {
+                for(int j = 0; j < 8; j++) {
+                    String pieceName = chessBoard[i][j].chessPiece.name;
+                    if(!(pieceName == null)) {
+                        if (pieceName.equals("horse")) {
+                            pieceName = "knight";
+                        } else if(pieceName.contains("Pawn")) {
+                            pieceName = "Pawn";
+                        }
+
+                        String team;
+
+                        if(chessBoard[i][j].chessPiece.isBlueTeam) {
+                            team = "blue";
+                        } else {
+                            team = "purple";
+                        }
+                        try {
+                            InputStream pieceStream = new FileInputStream("src/sample/data/" + team + " pieces/" + pieceName + ".png");
+                            Image piece = new Image(pieceStream);
+                            ImageView pieceView = new ImageView();
+                            pieceView.setImage(piece);
+                            pieceView.setMouseTransparent(true);
+                            double[] cord = arrayCoordToPixel(i, j);
+                            pieceView.setX(cord[0]);
+                            pieceView.setY(cord[1]);
+                            pGroup.getChildren().add(pieceView);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            Parent newRoot = pGroup;
+            scene = new Scene(newRoot);
+            stage.setScene(scene);
+            stage.show();
+    }
+
     public double[] arrayCoordToPixel(int xCoord, int yCoord) {
         double[] coordinates = new double[2];
-        coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
+//        coordinates[0] = ((double) (xCoord / 8)) * imageView.getFitHeight();
+
+        coordinates[0] = ((xCoord / 8.0)) * imageView.getFitWidth();
+        coordinates[1] = ((yCoord / 8.0)) * imageView.getFitHeight();
 
         return coordinates;
     }
@@ -850,7 +905,7 @@ public class MultiplayerController {
         blueBishopView.setX(148);
         blueBishopView.setY(490);
 
-        //blue queen
+        //blue king
         InputStream blueKingStream = new FileInputStream("src/sample/data/blue pieces/king.png");
         Image blueKing = new Image(blueKingStream);
         ImageView blueKingView = new ImageView();
