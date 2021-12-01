@@ -28,6 +28,26 @@ public class MultiplayerController {
     private Image boardImage;
     private int pickedXCoord;
     private int pickedYCoord;
+    private boolean enPassBlue[][] = {
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false}
+    };
+    private boolean enPassPurple[][] = {
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false}
+    };
 
 
     public class chessSquare {
@@ -186,8 +206,18 @@ public class MultiplayerController {
         int xCoord = coordinates[0];
         int yCoord = coordinates[1];
         if (gameState == "pickBlue") { // pickBlue is when you have to pick a blue chessPiece
+            for(int i = 0; i < 8; i++) {
+                for(int j = 0; j < 8; j++) {
+                    enPassBlue[i][j] = false;
+                }
+            }
             pickBlue(xCoord, yCoord);
         } else if (gameState == "pickPurple") { // same as above but for purple chess piece
+            for(int i = 0; i < 8; i++) {
+                for(int j = 0; j < 8; j++) {
+                    enPassPurple[i][j] = false;
+                }
+            }
             pickPurple(xCoord, yCoord);
         } else if (gameState == "bluePickSpot") { // once the blue piece has been picked, pick where to put it
             bluePickSpot(xCoord, yCoord);
@@ -327,9 +357,24 @@ public class MultiplayerController {
                         chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
                         chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
                         chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+
+                        if(yCoord - pickedYCoord == 2) {
+                            enPassPurple[xCoord][yCoord] = true;
+                        }
                     }
                 }
-            } else if (chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+            } else if ((yCoord - pickedYCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) && chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord - 1].chessPiece.isBlueTeam && enPassBlue[xCoord][yCoord - 1]) {
+                gameState = "pickPurple";
+                chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                chessBoard[xCoord][yCoord].isEmpty = false;
+                chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = false;
+                chessBoard[xCoord][yCoord - 1].chessPiece.name = null;
+                chessBoard[xCoord][yCoord - 1].isEmpty = true;
+                chessBoard[xCoord][yCoord - 1].chessPiece.isBlueTeam = false;
+                chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
+            } else if (!chessBoard[xCoord][yCoord].isEmpty && chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
                 if(yCoord - pickedYCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
                     gameState = "pickBlue";
                     chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
@@ -556,9 +601,24 @@ public class MultiplayerController {
                                   chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
                                   chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
                                   chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
+
+                                  if(pickedYCoord - yCoord  == 2) {
+                                      enPassBlue[xCoord][yCoord] = true;
+                                  }
                               }
                           }
-                      } else if (!chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
+                      } else if ((pickedYCoord - yCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) && chessBoard[xCoord][yCoord].isEmpty && !chessBoard[xCoord][yCoord + 1].chessPiece.isBlueTeam && enPassPurple[xCoord][yCoord + 1]) {
+                          gameState = "pickPurple";
+                          chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
+                          chessBoard[xCoord][yCoord].isEmpty = false;
+                          chessBoard[xCoord][yCoord].chessPiece.isBlueTeam = true;
+                          chessBoard[xCoord][yCoord + 1].chessPiece.name = null;
+                          chessBoard[xCoord][yCoord + 1].isEmpty = true;
+                          chessBoard[xCoord][yCoord + 1].chessPiece.isBlueTeam = false;
+                          chessBoard[pickedXCoord][pickedYCoord].chessPiece.name = null;
+                          chessBoard[pickedXCoord][pickedYCoord].isEmpty = true;
+                          chessBoard[pickedXCoord][pickedYCoord].chessPiece.isBlueTeam = false;
+                      } else if (!chessBoard[xCoord][yCoord].isEmpty && !chessBoard[xCoord][yCoord].chessPiece.isBlueTeam) {
                           if(pickedYCoord - yCoord == 1 && Math.abs(xCoord - pickedXCoord) == 1) {
                               gameState = "pickPurple";
                               chessBoard[xCoord][yCoord].chessPiece.name = pieceName;
