@@ -1051,7 +1051,7 @@ public class MultiplayerController {
 
         return new Group(imageView,rookView,knightView,bishopView,kingView,queenView,bishop2View,knight2View,
                 rook2View,pawnView,pawn2View,pawn3View,pawn4View,pawn5View,pawn6View,pawn7View,pawn8View,
-                blueRookView,blueKnightView,blueBishopView,blueKingView,blueBishopView2,blueKnightView2,
+                blueRookView,blueKnightView,blueBishopView,blueKingView, blueQueenView, blueBishopView2,blueKnightView2,
                 blueRookView2,bluePawnView1,bluePawnView2,bluePawnView3,bluePawnView4,bluePawnView5,bluePawnView6,bluePawnView7,bluePawnView8);
     }
 
