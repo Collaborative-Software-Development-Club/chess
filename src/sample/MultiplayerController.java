@@ -174,33 +174,6 @@ public class MultiplayerController {
         });
     }
 
-
-    int [] score(chessSquare[][] chessBoard){
-
-        int [] score = new int[2];
-        // first element is blue score
-        // second element is purple score
-        score[0] = 0;
-        score[1] = 1;
-
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++){
-                if (!chessBoard[i][j].isEmpty){
-                    if (!chessBoard[i][j].chessPiece.isDead){
-                        if (chessBoard[i][j].chessPiece.isBlueTeam){
-                            score[0] ++;
-                        }
-                        else{
-                            score[1] ++;
-                        }
-                    }
-                }
-
-            }
-        }
-        return score;
-    }
-
     @FXML
     void makeMove(ActionEvent event, int[] coordinates) throws IOException { // executes with every mouse click
         int xCoord = coordinates[0];
