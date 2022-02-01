@@ -29,7 +29,7 @@ public class MultiplayerController {
     private int pickedXCoord;
     private int pickedYCoord;
     private boolean enPassBlue[][] = {
-            {false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false},  //keeps track of if pawn can enPasan
             {false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false},
@@ -48,7 +48,6 @@ public class MultiplayerController {
             {false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false}
     };
-
 
     public class chessSquare {
         Boolean isEmpty;
@@ -118,8 +117,8 @@ public class MultiplayerController {
         chessBoard[0][0].chessPiece.name = "rook";
         chessBoard[1][0].chessPiece.name = "horse";
         chessBoard[2][0].chessPiece.name = "bishop";
-        chessBoard[3][0].chessPiece.name = "king";
-        chessBoard[4][0].chessPiece.name = "queen";
+        chessBoard[3][0].chessPiece.name = "queen";
+        chessBoard[4][0].chessPiece.name = "king";
         chessBoard[5][0].chessPiece.name = "bishop";
         chessBoard[6][0].chessPiece.name = "horse";
         chessBoard[7][0].chessPiece.name = "rook";
@@ -127,8 +126,8 @@ public class MultiplayerController {
         chessBoard[0][7].chessPiece.name = "rook";
         chessBoard[1][7].chessPiece.name = "horse";
         chessBoard[2][7].chessPiece.name = "bishop";
-        chessBoard[3][7].chessPiece.name = "king";
-        chessBoard[4][7].chessPiece.name = "queen";
+        chessBoard[3][7].chessPiece.name = "queen";
+        chessBoard[4][7].chessPiece.name = "king";
         chessBoard[5][7].chessPiece.name = "bishop";
         chessBoard[6][7].chessPiece.name = "horse";
         chessBoard[7][7].chessPiece.name = "rook";
@@ -141,7 +140,6 @@ public class MultiplayerController {
         gameState = "pickBlue"; // blue piece needs to be picked
 
         startGame(event);
-
     }
 
     // executes
@@ -804,7 +802,7 @@ public class MultiplayerController {
         ImageView kingView = new ImageView();
         kingView.setImage(king);
         kingView.setMouseTransparent(true);
-        coordinates = arrayCoordToPixel(3, 0);
+        coordinates = arrayCoordToPixel(4, 0);
         kingView.setX(coordinates[0]);
         kingView.setY(coordinates[1]);
 
@@ -814,7 +812,7 @@ public class MultiplayerController {
         ImageView queenView = new ImageView();
         queenView.setImage(queen);
         queenView.setMouseTransparent(true);
-        coordinates = arrayCoordToPixel(4, 0);
+        coordinates = arrayCoordToPixel(3, 0);
         queenView.setX(coordinates[0]);
         queenView.setY(coordinates[1]);
 
@@ -952,13 +950,13 @@ public class MultiplayerController {
         blueBishopView.setX(coordinates[0]);
         blueBishopView.setY(coordinates[1]);
 
-        //blue queen
+        //blue king
         InputStream blueKingStream = new FileInputStream("src/sample/data/blue pieces/king.png");
         Image blueKing = new Image(blueKingStream);
         ImageView blueKingView = new ImageView();
         blueKingView.setImage(blueKing);
         blueKingView.setMouseTransparent(true);
-        coordinates = arrayCoordToPixel(3, 7);
+        coordinates = arrayCoordToPixel(4, 7);
         blueKingView.setX(coordinates[0]);
         blueKingView.setY(coordinates[1]);
 
@@ -968,7 +966,7 @@ public class MultiplayerController {
         ImageView blueQueenView = new ImageView();
         blueQueenView.setImage(blueQueen);
         blueQueenView.setMouseTransparent(true);
-        coordinates = arrayCoordToPixel(4, 7);
+        coordinates = arrayCoordToPixel(3, 7);
         blueQueenView.setX(coordinates[0]);
         blueQueenView.setY(coordinates[1]);
 
