@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 public class MultiplayerController {
 
@@ -733,7 +733,7 @@ public class MultiplayerController {
                             team = "purple";
                         }
                         try {
-                            InputStream pieceStream = new FileInputStream("src/sample/data/" + team + " pieces/" + pieceName + ".png");
+                            InputStream pieceStream = new FileInputStream("src/sample/data/" + team + " pieces/" + pieceName.toLowerCase(Locale.ROOT) + ".png");
                             Image piece = new Image(pieceStream);
                             ImageView pieceView = new ImageView();
                             pieceView.setImage(piece);
