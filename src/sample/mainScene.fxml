@@ -16,17 +16,7 @@
          <Insets />
       </VBox.margin>
     </Label>
-    <Button fx:id="singleplayerBtn" onAction="#startSingleplayer" text="Singleplayer">
-      <font>
-         <Font size="20.0" />
-      </font>
-      <padding>
-         <Insets left="13.0" right="13.0" />
-      </padding>
-      <VBox.margin>
-         <Insets top="20.0" />
-      </VBox.margin></Button>
-   <Button fx:id="multiplayerBtn" mnemonicParsing="false" onAction="#startMultiplayer" text="Multiplayer">
+   <Button fx:id="multiplayerBtn" mnemonicParsing="false" onAction="#startMultiplayer" text="Play">
       <font>
          <Font size="20.0" />
       </font>
